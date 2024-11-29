@@ -1,16 +1,17 @@
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 
-// Also install this npm i --save-dev @types/react-lottie
-import Lottie from "react-lottie";
-
-import { cn } from "@/lib/utils";
-
 import animationData from "@/data/confetti.json";
+import dynamic from "next/dynamic";
 import MagicButton from "../MagicButton";
 import { BackgroundGradientAnimation } from "./GradientBg";
 import GridGlobe from "./GridGlobe";
 import { InfiniteMovingCardsTech } from "./InfiniteCardsTech";
+
+const LottieAnimation = dynamic(() => import("./LottieAnimation"), {
+  ssr: false,
+});
 
 export const BentoGrid = ({
   className,
@@ -198,11 +199,15 @@ export const BentoGridItem = ({
               {/* add handleCopy() for the copy the text */}
               <div
                 className={`absolute -bottom-5 right-0 ${
-                  copied ? "block" : "block"
+                  copied ? "block" : "hidden"
                 }`}
               >
                 {/* <img src="/confetti.gif" alt="confetti" /> */}
-                <Lottie options={defaultOptions} height={200} width={400} />
+                {/* <Lottie options={defaultOptions} height={200} width={400} /> */}
+                <LottieAnimation
+                  copied={copied}
+                  animationData={animationData}
+                />
               </div>
 
               <MagicButton

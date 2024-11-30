@@ -184,7 +184,9 @@ export const BentoGridItem = ({
                 className="my-5"
               />
 
-              <InfiniteMovingCardsTech items={rightLists} className="my-7" />
+              <InfiniteMovingCardsTech items={rightLists} className="my-5" />
+
+              <div className="my-2"></div>
             </div>
           )}
           {id === 6 && (

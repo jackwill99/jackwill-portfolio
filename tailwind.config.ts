@@ -151,6 +151,14 @@ const config = {
             transform: "translateY(calc(-50% - 0.5rem))",
           },
         },
+        scrollLeft: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        scrollRight: {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -166,6 +174,8 @@ const config = {
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
         scrollVertical:
           "scrollVertical var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        scrollLeft: "scrollLeft 40s linear infinite",
+        scrollRight: "scrollRight 40s linear infinite",
       },
     },
   },

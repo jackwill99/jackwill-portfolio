@@ -1,99 +1,83 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 export const InfiniteMovingCardsTech = ({
   items,
   direction = "left",
-  speed = "fast",
-  pauseOnHover = true,
   className,
 }: {
   items: string[];
   direction?: "left" | "right";
-  speed?: "fast" | "normal" | "slow";
-  pauseOnHover?: boolean;
   className?: string;
 }) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const scrollerRef = React.useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    addAnimation();
-  }, []);
-  const [start, setStart] = useState(false);
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
-
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
-
-      getDirection();
-      getSpeed();
-      setStart(true);
-    }
-  }
-  const getDirection = () => {
-    if (containerRef.current) {
-      console.log(direction);
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards",
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse",
-        );
-      }
-    }
-  };
-  const getSpeed = () => {
-    if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
-      }
-    }
-  };
   return (
     <div
-      ref={containerRef}
       className={cn(
-        // max-w-7xl to w-screen
-        "scroller relative z-20 w-screen overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "flex [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className,
       )}
     >
       <div
-        ref={scrollerRef}
         className={cn(
-          // change gap-16
-          " flex gap-3 md:gap-3 lg:gap-8",
-          start && "animate-scroll ",
-          pauseOnHover && "hover:[animation-play-state:paused]",
+          `flex flex-none py-0.5 gap-6 pr-6 animate-${
+            direction == "left" ? "scrollLeft" : "scrollRight"
+          } [animation-duration:40s]`,
         )}
       >
-        {items.map((item, idx) => (
-          <span
-            key={idx}
-            className="lg:py-4 lg:px-3 py-2 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#10132E] whitespace-nowrap"
-          >
-            {item}
-          </span>
-        ))}
+        {[...new Array(2)].fill(0).map((_, index) => {
+          console.log(index);
+          return (
+            <Fragment key={index}>
+              {[...items, ...items].map((item, id) => (
+                <span className=" inline-flex items-center gap-4 lg:py-4 lg:px-3 py-2 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#10132E] whitespace-nowrap">
+                  {item}
+                </span>
+              ))}
+            </Fragment>
+          );
+        })}
       </div>
     </div>
+
+    // <div className="bg-dark text-white p-6 rounded-lg space-y-6">
+    //   {/* My Toolbox Section */}
+    //   <div className="flex flex-col items-center">
+    //     <div className="overflow-hidden w-full mt-4">
+
+    //       {/* Row 1 - Moves Left to Right */}
+    //       {/* <div className="flex  animate-scrollLeft">
+    //         {[
+    //           new Array(2).fill(0).map((_, index) => (
+    //             <Fragment key={index}>
+    //               {skills.map((skill, index) => (
+    //                 <div
+    //                   key={`row1-${index}`}
+    //                   className="bg-gray-800 text-gray-200 px-4 py-2 rounded-full whitespace-nowrap mx-2"
+    //                 >
+    //                   {skill}
+    //                 </div>
+    //               ))}
+    //             </Fragment>
+    //           )),
+    //         ]}
+    //       </div> */}
+
+    //       {/* Row 2 - Moves Right to Left */}
+    //       {/* <div className="flex animate-scrollRight mt-4">
+    //         {skills.concat(skills).map((skill, index) => (
+    //           <div
+    //             key={`row2-${index}`}
+    //             className="bg-gray-800 text-gray-200 px-4 py-2 rounded-full whitespace-nowrap mx-2"
+    //           >
+    //             {skill}
+    //           </div>
+    //         ))}
+    //       </div> */}
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

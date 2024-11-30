@@ -149,17 +149,21 @@ export const BentoGridItem = ({
         <div
           className={cn(
             titleClassName,
-            "group-hover/bento:translate-x-2 transition duration-200 relative md:h-full min-h-40 flex flex-col px-5 p-5 lg:p-10",
+            "relative md:h-full min-h-40 flex flex-col px-5 p-5 lg:p-10",
           )}
         >
           {/* change the order of the title and des, font-extralight, remove text-xs text-neutral-600 dark:text-neutral-300 md:max-w-32 , change the text-color */}
-          <div className="font-sans font-extralight  md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10">
+          <div
+            className={`group-hover/bento:translate-x-2 transition duration-200 font-sans font-extralight  md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10 ${
+              id == 1 ? "mt-5" : ""
+            }`}
+          >
             {description}
           </div>
           {/* add text-3xl max-w-96 , remove text-neutral-600 dark:text-neutral-300*/}
           {/* remove mb-2 mt-2 */}
           <div
-            className={`font-sans text-lg lg:text-3xl max-w-96 font-bold z-10`}
+            className={`group-hover/bento:translate-x-2 transition duration-200 font-sans text-lg lg:text-3xl max-w-96 font-bold z-10`}
           >
             {title}
           </div>
@@ -169,30 +173,22 @@ export const BentoGridItem = ({
 
           {/* Tech stack list div */}
           {id === 1 && (
-            <div className="flex flex-col gap-3 lg:gap-5 mt-5">
+            <div className="items-center justify-center">
               {/* tech stack lists */}
 
-              <InfiniteMovingCardsTech
-                items={leftLists}
-                direction="left"
-                speed="fast"
-              />
+              <InfiniteMovingCardsTech items={leftLists} className="my-5" />
 
               <InfiniteMovingCardsTech
                 items={centerLists}
                 direction="right"
-                speed="fast"
+                className="my-5"
               />
 
-              <InfiniteMovingCardsTech
-                items={rightLists}
-                direction="left"
-                speed="fast"
-              />
+              <InfiniteMovingCardsTech items={rightLists} className="my-7" />
             </div>
           )}
           {id === 6 && (
-            <div className="mt-5 relative">
+            <div className="group-hover/bento:translate-x-2 transition duration-200 mt-5 relative">
               {/* button border magic from tailwind css buttons  */}
               {/* add rounded-md h-8 md:h-8, remove rounded-full */}
               {/* remove focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 */}

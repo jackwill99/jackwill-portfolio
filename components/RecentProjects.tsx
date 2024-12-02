@@ -3,6 +3,7 @@
 import { FaLocationArrow } from "react-icons/fa6";
 
 import { projects } from "@/data";
+import Link from "next/link";
 import { PinContainer } from "./ui/Pin";
 
 const RecentProjects = () => {
@@ -12,19 +13,16 @@ const RecentProjects = () => {
         A small selection of{" "}
         <span className="text-purple">recent projects</span>
       </h1>
-      <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
+      <div className="flex flex-wrap items-center  p-4 gap-x-24 gap-y-8 mt-10">
         {projects.map((item) => (
           <div
-            className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]"
+            className="sm:h-[41rem] h-[32rem] flex items-center justify-center sm:w-[570px] w-[80vw]"
             key={item.id}
           >
-            <PinContainer
-              title="/ui.aceternity.com"
-              href="https://twitter.com/mannupaaji"
-            >
-              <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
+            <PinContainer title="Visit" href={item.link}>
+              <div className="relative flex items-center justify-center sm:w-[570px] w-[80vw] overflow-hidden sm:h-[40vh] h-[30vh] mb-4">
                 <div
-                  className="relative w-full h-full overflow-hidden lg:rounded-3xl"
+                  className="relative w-full h-full overflow-hidden rounded-3xl"
                   style={{ backgroundColor: "#13162D" }}
                 >
                   <img src="/bg.png" alt="bgimg" />
@@ -32,7 +30,8 @@ const RecentProjects = () => {
                 <img
                   src={item.img}
                   alt="cover"
-                  className="z-10 absolute bottom-0"
+                  className="z-10 absolute rounded-lg w-full sm:h-[37vh] h-[27vh] object-cover"
+                  style={{ rotate: "2deg", scale: 0.95 }}
                 />
               </div>
 
@@ -41,7 +40,7 @@ const RecentProjects = () => {
               </h1>
 
               <p
-                className="lg:text-xl lg:font-normal font-light text-sm line-clamp-2"
+                className="lg:text-lg lg:font-normal font-light text-sm line-clamp-4 md:h-28"
                 style={{
                   color: "#BEC1DD",
                   margin: "1vh 0",
@@ -64,13 +63,16 @@ const RecentProjects = () => {
                     </div>
                   ))}
                 </div>
-
-                <div className="flex justify-center items-center">
-                  <p className="flex lg:text-xl md:text-xs text-sm text-purple">
-                    Check Live Site
-                  </p>
-                  <FaLocationArrow className="ms-3" color="#CBACF9" />
-                </div>
+                {item.link && item.link.length > 0 && (
+                  <Link href={item.link} target="_blank">
+                    <div className="flex justify-center items-center">
+                      <p className="flex lg:text-xl md:text-xs text-sm text-purple">
+                        Check Live Site
+                      </p>
+                      <FaLocationArrow className="ms-3" color="#CBACF9" />
+                    </div>
+                  </Link>
+                )}
               </div>
             </PinContainer>
           </div>

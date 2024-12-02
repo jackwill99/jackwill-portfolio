@@ -27,7 +27,6 @@ export const InfiniteMovingCardsTech = ({
         )}
       >
         {[...new Array(2)].fill(0).map((_, index) => {
-          console.log(index);
           return (
             <Fragment key={index}>
               {[...items, ...items].map((item, id) => (

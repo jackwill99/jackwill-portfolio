@@ -150,7 +150,7 @@ export const projects = [
     title: "Zarla Delivery",
     des: "Delivery management system with real-time delivery tracking, parcel processing and order management.",
     img: "/p8.png",
-    iconLists: ["/re.svg", "/node.svg"],
+    iconLists: ["/re.svg", "/node.svg", "/postgresql.svg", "/azure.svg"],
     link: "https://zarladistribution.com/",
   },
 ];
